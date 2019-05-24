@@ -17,26 +17,21 @@ namespace QrCodeApiApp.Controllers
     [ApiController]
     public class EncodeController : ControllerBase
     {
+
         // GET api/encode
         [HttpGet]
-        public ActionResult<string> Get()
-        {
-            //return new string[] { "value1", "value2" };
-            return "Error: Usage- /api/encode/text=TextToEncode&size=SizeOfQrCode";
-        }
-
-        // GET api/encode/SomeReallyLongText
-        [HttpGet("text={text}&size={size}")]
-        public ActionResult<FileStreamResult> Get(string text, int size)
+        public ActionResult<FileStreamResult> Get([RequiredFromQuery] string text, int size=250)
         {
             return QrEncode(text, size);
         }
 
         // POST api/encode
+        // TODO: Add support for posting data instead of using a GET
+
         //[HttpPost]
-        //public ActionResult<Bitmap> Post([FromBody] string value)
+        //public ActionResult<Bitmap> Post([FromBody] string text)
         //{
-        //    return QrEncode(value);
+        //    return QrEncode(text);
         //}
 
         private FileResult QrEncode(string value, int size=250, Bitmap bgImage=null )
