@@ -16,10 +16,8 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
-- task: DownloadBuildArtifacts@0
+- task: DotNetCoreCLI@2
   inputs:
-    buildType: 'current'
-    downloadType: 'single'
-    artifactName: 'artifactsname'
-    downloadPath: '$(build.artifactstagingdirectory)'
+    command: 'publish'
+    publishWebProjects: true
 
