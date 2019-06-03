@@ -7,4 +7,4 @@ https://github.com/saksitsu/-NetCore-QRCodeGenrate.git
 
 https://github.com/micjahn/ZXing.Net
 
-Usage (once it's running):  yoursite.com/api/encode/text=SomeTextToEncode&size=200
+Usage (once it's running):  yoursite.com/api/encode?text=SomeTextToEncode&size=200
