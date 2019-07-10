@@ -1,0 +1,44 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-2019'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '**/QrCodeApiApp.csproj'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/QrCodeApiApp.csproj'
+    arguments: '--configuration $(buildConfiguration) --no-restore'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: '**/QrCodeApiApp.csproj'
+    arguments: '-c $(buildConfiguration) -o $(Build.StagingDirectory)/ci-build --no-build'
+    zipAfterPublish: false
+    modifyOutputPath: false
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.StagingDirectory)/ci-build'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/QrCodeApiApp.$(Build.BuildNumber).zip'
+    replaceExistingArchive: true
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/QrCodeApiApp.$(Build.BuildNumber).zip'
+    ArtifactName: 'QrCodeApiApp.$(Build.BuildNumber)'
+    publishLocation: 'Container'
