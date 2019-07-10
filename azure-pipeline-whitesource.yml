@@ -21,10 +21,6 @@ steps:
     command: 'build'
     projects: '**/QrCodeApiApp.csproj'
     arguments: '--configuration $(buildConfiguration) --no-restore'
-- task: WhiteSource@19
+- task: WhiteSource Bolt@19
   inputs:
-    cwd: '$(Build.SourcesDirectory)'
-    extensions: '.dll'
-    checkPolicies: 'SEND_ALERTS'
-    projectRule: 'projectName'
-    projectName: '$(Build.Repository.Name)'
+    cwd: '/'
