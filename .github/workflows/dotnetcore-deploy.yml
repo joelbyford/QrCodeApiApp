@@ -10,7 +10,6 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: qrcode-api-app    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: '.'
 
 jobs:
   build-and-deploy:
@@ -29,11 +28,11 @@ jobs:
     
     - name: dotnet publish
       run: |
-        dotnet publish -c Release -o ${{ env.AZURE_WEBAPP_PACKAGE_PATH }} 
+        dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp 
         
     - name: 'Run Azure webapp deploy action using publish profile credentials'
       uses: azure/webapps-deploy@v1
       with: 
         app-name: ${{env.AZURE_WEBAPP_NAME}} 
         publish-profile: ${{ secrets.azureWebAppPublishProfile }} 
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        package: ./myapp
