@@ -1,0 +1,38 @@
+name: .NET Core - Release from Master
+#
+# Only run this on master branch as we will only release from master
+#
+on: 
+  pull_request:
+    branches: master
+  push:
+    branches: master
+
+env:
+  AZURE_WEBAPP_NAME: qrcode-api-app    # set this to your application's name
+
+jobs:
+  build-and-deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.108
+    
+    - name: Build with dotnet
+      run: dotnet build --configuration Release
+    
+    - name: dotnet publish
+      run: |
+        dotnet publish -c Release -o myapp 
+        
+    - name: 'Run Azure webapp deploy action using publish profile credentials'
+      uses: azure/webapps-deploy@v1
+      with: 
+        app-name: ${{env.AZURE_WEBAPP_NAME}} 
+        publish-profile: ${{ secrets.azureWebAppPublishProfile }} 
+        package: './myapp' 
