@@ -10,6 +10,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: qrcode-api-app    # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: '.'
 
 jobs:
   build-and-deploy:
@@ -35,4 +36,4 @@ jobs:
       with: 
         app-name: ${{env.AZURE_WEBAPP_NAME}} 
         publish-profile: ${{ secrets.azureWebAppPublishProfile }} 
-        package: 'myapp' 
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
