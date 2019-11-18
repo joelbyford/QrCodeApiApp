@@ -3,8 +3,6 @@ name: .NET Core - Release from Master
 # Only run this on master branch as we will only release from master
 #
 on: 
-  pull_request:
-    branches: master
   push:
     branches: master
 
