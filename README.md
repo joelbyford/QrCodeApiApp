@@ -1,4 +1,4 @@
-[![Build Status](https://joelbyford.visualstudio.com/QrCodeApiApp/_apis/build/status/niematron.QrCodeApiApp?branchName=master)](https://joelbyford.visualstudio.com/QrCodeApiApp/_build/latest?definitionId=6&branchName=master)
+![](https://github.com/joelbyford/QrCodeApiApp/workflows/.NET%20Core%20-%20Release%20from%20Master/badge.svg)
 
 # QrCodeApiApp
 A simple QRCode Encoder API in .NET Core using ZXing and published as an Azure API App.  "Leveraging" much of the work others have performed ahead of me.  Special thanks to GitHub Contributors Including:

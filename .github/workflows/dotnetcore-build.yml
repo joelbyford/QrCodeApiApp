@@ -1,6 +1,8 @@
 name: .NET Core
 
 on: 
+  pull_request:
+    branches: master
   push:
     branches-ignore: master
 
