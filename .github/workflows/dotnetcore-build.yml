@@ -6,7 +6,7 @@ on:
   push:
     branches-ignore: master
 
-jenv:
+env:
   AZURE_WEBAPP_NAME: qrcode-api-app    # set this to your application's name
 
 jobs:
