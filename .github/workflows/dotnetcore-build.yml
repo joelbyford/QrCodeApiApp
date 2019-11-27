@@ -1,4 +1,4 @@
-name: .NET Core Debug in Staging
+name: .NET Core - Debug in Staging
 
 on: 
   pull_request:
