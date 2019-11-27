@@ -1,10 +1,8 @@
 name: .NET Core - Release from Master
 #
-# Only run this on master branch as we will only release from master
+# Only run this on deployment (manually triggered)
 #
-on: 
-  push:
-    branches: master
+on: deployment
 
 env:
   AZURE_WEBAPP_NAME: qrcode-api-app    # set this to your application's name
