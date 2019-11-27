@@ -6,8 +6,11 @@ on:
   push:
     branches-ignore: master
 
+jenv:
+  AZURE_WEBAPP_NAME: qrcode-api-app    # set this to your application's name
+
 jobs:
-  build:
+  build-and-deploy:
 
     runs-on: ubuntu-latest
 
@@ -17,5 +20,18 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 2.2.108
+    
     - name: Build with dotnet
-      run: dotnet build --configuration Release
+      run: dotnet build --configuration Debug
+    
+    - name: dotnet publish
+      run: |
+        dotnet publish -c Debug -o ${{env.DOTNET_ROOT}}/myapp 
+        
+    - name: 'Deploy to Staging Slot for Validation'
+      uses: azure/webapps-deploy@v1
+      with: 
+        app-name: ${{env.AZURE_WEBAPP_NAME}} 
+        publish-profile: ${{ secrets.azureWebAppPublishProfileStaging }} 
+        package: ${{env.DOTNET_ROOT}}/myapp 
+
