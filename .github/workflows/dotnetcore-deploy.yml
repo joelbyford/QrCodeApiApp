@@ -1,6 +1,6 @@
 name: .NET Core - Release from Master
 #
-# Only run this on deployment (manually triggered)
+# Run when pushed to master (successfull PR with branch permissions turned on)
 #
 on: 
   push:
@@ -16,21 +16,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 2.2.108
     
-    - name: Build with dotnet
+    - name: Login to Azure
       run: dotnet build --configuration Release
     
     - name: dotnet publish
       run: |
-        dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp 
+          echo "Logging into Azure..."
+          az login --service-principal -u ${{ secrets.CLIENT_ID }} -p ${{ secrets.CLIENT_SECRET }} --tenant ${{ secrets.TENANT_ID }}
         
-    - name: 'Run Azure webapp deploy action using publish profile credentials'
-      uses: azure/webapps-deploy@v1
-      with: 
-        app-name: ${{env.AZURE_WEBAPP_NAME}} 
-        publish-profile: ${{ secrets.azureWebAppPublishProfile }} 
-        package: ${{env.DOTNET_ROOT}}/myapp 
+    - name: 'Perform an az cli appservice slotswap'
+      run: |
+        echo "Running a CLI Slot Swap..."
+        az webapp deployment slot swap --name qrcode-api-app --resource-group rgDoNotDeleteDemos --slot test --target-slot Production  
