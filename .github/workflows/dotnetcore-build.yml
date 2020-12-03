@@ -3,8 +3,6 @@ name: .NET Core - Debug in Staging
 on: 
   pull_request:
     branches: master
-  push:
-    branches-ignore: master
 
 env:
   AZURE_WEBAPP_NAME: qrcode-api-app    # set this to your application's name
