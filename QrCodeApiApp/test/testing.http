@@ -1,10 +1,23 @@
-# Example GET sending the text "SomeTextToEncode"
+# Example GET sending the text "SomeTextToEncode" - ANONYMOUS ACCESS
 GET http://localhost:5000/api/encode?text=SomeTextToEncode&size=150
 
 ####
-# Example POST sending a URL via post
+# Example POST sending a URL via post - ANONYMOUS ACCESS
 POST http://localhost:5000/api/encode?size=500
 Content-Type: text/plain
 
 https://github.com/joelbyford/QrCodeApiApp
 
+
+####
+# Example GET sending the text "SomeTextToEncode" - BASIC AUTHENTICATION 
+GET http://localhost:5000/api/encode?text=SomeTextToEncode&size=150
+Authorization: Basic testUser:testPassword
+
+####
+# Example POST sending a URL via post - BASIC AUTHENTICATION
+POST http://localhost:5000/api/encode?size=500
+Content-Type: text/plain
+Authorization: Basic testUser:testPassword
+
+https://github.com/joelbyford/QrCodeApiApp

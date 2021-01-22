@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using joelbyford;
+using System.IO;
+using System.Text.Json;
 
 namespace QrCodeApiApp
 {
@@ -43,7 +46,21 @@ namespace QrCodeApiApp
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "QrCodeApiApp v5"));
             }
+            //Insert the Basic Authentication Middleware handler *ONLY IF* it was enabled in appsettings.json
+            bool basicAuthEnabled = this.Configuration.GetValue<bool>("AppSettings:BasicAuth:Enabled");
             
+            if (basicAuthEnabled)
+            {   
+                //Uses values from "BasicAuth" under "AppSettings" in the appsettings.json
+                String basicAuthRealm = this.Configuration.GetValue<String>("AppSettings:BasicAuth:Realm");
+                String basicAuthUserJson = this.Configuration.GetValue<String>("AppSettings:BasicAuth:UsersJson");
+
+                // Using the BasicAuth NuGet package from https://github.com/joelbyford/BasicAuth
+                Dictionary<string, string> basicAuthUsers = new Dictionary<string, string>();
+                var packageJson = File.ReadAllText(basicAuthUserJson);
+                basicAuthUsers = JsonSerializer.Deserialize<Dictionary<string, string>>(packageJson);
+                app.UseMiddleware<joelbyford.BasicAuth>(basicAuthRealm, basicAuthUsers);
+            }
 
             app.UseHttpsRedirection();
 
