@@ -1,0 +1,10 @@
+# Example GET sending the text "SomeTextToEncode"
+GET http://localhost:5000/api/encode?text=SomeTextToEncode&size=150
+
+####
+# Example POST sending a URL via post
+POST http://localhost:5000/api/encode?size=500
+Content-Type: text/plain
+
+https://github.com/joelbyford/QrCodeApiApp
+
