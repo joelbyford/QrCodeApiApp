@@ -1,15 +1,18 @@
-![](https://github.com/joelbyford/QrCodeApiApp/workflows/.NET%20Core%20-%20Release%20from%20Master/badge.svg)
 
 # QrCodeApiApp
 A simple QRCode Encoder API in .NET 5 using ZXing and published as an Azure API App.  
 
-## GET Usage 
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjoelbyford%2FQrCodeApiApp%2Fmaster%2FDeployTemplates%2FAzureLinuxWebAppArm.json)
+
+## Examples and Usage
+
+### GET Usage 
 Once running as a website, simply call
 ```
 GET http://yoursite.com/api/encode?text=SomeTextToEncode&size=200
 ```
 
-## POST Usage
+### POST Usage
 Additionally you may send text as `text/plain` to make it easier to send blocks of text without URL encoding them.  Example of that call is here:
 ```
 POST http://localhost:5000/api/encode?size=500
