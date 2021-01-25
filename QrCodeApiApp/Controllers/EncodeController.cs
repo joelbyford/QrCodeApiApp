@@ -16,19 +16,18 @@ namespace QrCodeApiApp.Controllers
 
         // GET api/encode
         [HttpGet]
-        public ActionResult<FileStreamResult> Get([RequiredFromQuery] string text, int size=250)
+        public FileResult Get([RequiredFromQuery] string text, int size=250)
         {
             return QrEncode(text, size);
         }
 
         // POST api/encode
-        // TODO: Add support for posting data instead of using a GET
 
-        //[HttpPost]
-        //public ActionResult<Bitmap> Post([FromBody] string text)
-        //{
-        //    return QrEncode(text);
-        //}
+        [HttpPost]
+        public FileResult Post([FromBody] string body, int size=250)
+        {
+            return QrEncode(body, size);
+        }
 
         private FileResult QrEncode(string value, int size=250, Bitmap bgImage=null )
         {
