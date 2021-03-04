@@ -2,7 +2,7 @@
 # QrCodeApiApp
 A simple QRCode Encoder API in .NET 5 using ZXing and published as an Azure API App.  
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjoelbyford%2FQrCodeApiApp%2Fmaster%2FDeployTemplates%2FAzureLinuxWebAppArm.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjoelbyford%2FQrCodeApiApp%2Fmain%2FDeployTemplates%2FAzureLinuxWebAppArm.json)
 
 ## Examples and Usage
 
