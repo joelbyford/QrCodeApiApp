@@ -1,4 +1,4 @@
-name: Deploy on Push to Main
+name: Test on Pull Request to Main
 # only run on push to main (merges)
 on:
   pull_request:
