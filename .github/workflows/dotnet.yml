@@ -1,4 +1,4 @@
-name: .NET
+name: Deploy on Push to Main
 # only run on push to main (merges)
 on:
   push:
@@ -21,8 +21,11 @@ jobs:
     - name: Restore package dependencies
       run: dotnet restore
 
-    - name: Build
-      run: dotnet build --no-restore
+    - name: dotet build
+      run: dotnet build --no-restore --configuration Release
+      
+    - name: dotnet publish
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp 
 
     - name: Azure WebApp Deploy
       uses: Azure/webapps-deploy@v2
@@ -34,7 +37,7 @@ jobs:
         # Enter an existing Slot other than the Production slot
         # slot-name: # optional, default is production
         # Applies to Web App only: Path to package or folder. *.zip, *.war, *.jar or a folder to deploy
-        # package: # optional, default is .
+        package: ${{env.DOTNET_ROOT}}/myapp
 
 
 
