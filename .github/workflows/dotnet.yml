@@ -1,0 +1,42 @@
+name: .NET
+# only run on push to main (merges)
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Git checkout
+    - uses: actions/checkout@v2
+    
+    - name: Setup dotnet 5.0.x
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+        
+    - name: Restore package dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --no-restore
+
+    - name: Azure WebApp Deploy
+      uses: Azure/webapps-deploy@v2
+      with:
+        # Name of the Azure Web App
+        app-name: qrcode-api-app
+        # Applies to Web Apps(Windows and Linux) and Web App Containers(linux). Multi container scenario not supported. Publish profile (*.publishsettings) file contents with Web Deploy secrets
+        publish-profile: ${{secrets.AZUREWEBAPPPUBLISHPROFILE}}
+        # Enter an existing Slot other than the Production slot
+        # slot-name: # optional, default is production
+        # Applies to Web App only: Path to package or folder. *.zip, *.war, *.jar or a folder to deploy
+        # package: # optional, default is .
+
+
+
+
+
