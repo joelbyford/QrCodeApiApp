@@ -1,4 +1,4 @@
-[![Deploy on Push to Main](https://github.com/joelbyford/QrCodeApiApp/actions/workflows/dotnet.yml/badge.svg)](https://github.com/joelbyford/QrCodeApiApp/actions/workflows/dotnet.yml)
+[![Deploy on Push to Main](https://github.com/joelbyford/QrCodeApiApp/actions/workflows/dotnet.yml/badge.svg)](https://github.com/joelbyford/QrCodeApiApp/actions/workflows/dotnet.yml)   [![Test on Pull Request to Main](https://github.com/joelbyford/QrCodeApiApp/actions/workflows/dotnet_test.yml/badge.svg)](https://github.com/joelbyford/QrCodeApiApp/actions/workflows/dotnet_test.yml)
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjoelbyford%2FQrCodeApiApp%2Fmain%2FDeployTemplates%2FAzureLinuxWebAppArm.json)
 
