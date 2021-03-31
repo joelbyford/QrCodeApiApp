@@ -46,7 +46,7 @@ jobs:
       uses: Azure/cli@1.0.4
       with:
         # Specify the script here
-        inlineScript: az webapp deploy --name ${{ secrets.APP_NAME }} --resource-group ${{ secrets.APP_RG }} --src-path ${{env.DOTNET_ROOT}}/myapp --slot staging
+        inlineScript: az webapp deploy --name ${{secrets.APP_NAME}} --resource-group ${{secrets.APP_RG}} --src-path ${{env.DOTNET_ROOT}}/myapp --slot staging --type zip
 
   test:
     runs-on: ubuntu-latest
@@ -84,7 +84,9 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           # Specify the script here
-          inlineScript: az webapp deployment slot swap  --name ${{ secrets.APP_NAME }} --resource-group ${{ secrets.APP_RG }} --slot staging --target-slot production
+          inlineScript: az webapp deployment slot swap  --name ${{secrets.APP_NAME}} --resource-group ${{secrets.APP_RG}} --slot staging --target-slot production
+          
+          
 
 
 
