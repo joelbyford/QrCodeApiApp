@@ -43,7 +43,7 @@ jobs:
         environment: azureusgovernment
          
     - name: Azure Publish to Staging
-      run: az webapp deploy --name ${{secrets.APP_NAME}} --resource-group ${{secrets.APP_RG}} --src-path ~/myapp --slot staging
+      run: az webapp deploy --name ${{secrets.APP_NAME}} --resource-group ${{secrets.APP_RG}} --src-path ~/myapp --slot staging --type static
 
   test:
     runs-on: ubuntu-latest
