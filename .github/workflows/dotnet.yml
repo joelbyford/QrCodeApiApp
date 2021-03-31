@@ -43,12 +43,7 @@ jobs:
         environment: azureusgovernment
     
     - name: Azure Publish to Staging
-      uses: Azure/cli@1.0.4
-      with:
-        # Specify the script here
-        inlineScript: |
-                      ls -l ${{env.DOTNET_ROOT}}/myapp
-                      az webapp deploy --name ${{secrets.APP_NAME}} --resource-group ${{secrets.APP_RG}} --src-path ${{env.DOTNET_ROOT}}/myapp --slot staging --type zip
+      run: az webapp deploy --name ${{secrets.APP_NAME}} --resource-group ${{secrets.APP_RG}} --src-path ${{env.DOTNET_ROOT}}/myapp --slot staging --type zip
 
   test:
     runs-on: ubuntu-latest
