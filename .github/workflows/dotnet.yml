@@ -32,7 +32,10 @@ jobs:
       run: dotnet build --no-restore --configuration Release
       
     - name: dotnet publish
-      run: dotnet publish -c Release -o ~/myapp 
+      run: dotnet publish -c Release -o ~/myapp --no-build
+      
+    - name: show published contents
+      run: ls -l ~/myapp
     
     - name: Azure Login
       uses: Azure/login@v1
@@ -42,6 +45,9 @@ jobs:
         # Name of the environment. Supported values are azurecloud, azurestack, azureusgovernment, azurechinacloud, azuregermancloud. Default being azurecloud
         environment: azureusgovernment
     
+    - name: show published contents - after login
+      run: ls -l ~/myapp
+      
     - name: Azure Publish to Staging
       run: az webapp deploy --name ${{secrets.APP_NAME}} --resource-group ${{secrets.APP_RG}} --src-path ~/myapp --slot staging --type zip
 
