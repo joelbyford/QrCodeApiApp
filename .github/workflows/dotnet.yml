@@ -43,7 +43,7 @@ jobs:
         environment: azureusgovernment
     
     - name: Azure Publish to Staging
-      run: az webapp deploy --name ${{secrets.APP_NAME}} --resource-group ${{secrets.APP_RG}} --src-path ${{env.DOTNET_ROOT}}/myapp --slot staging --type zip
+      run: az webapp deploy --name ${{secrets.APP_NAME}} --resource-group ${{secrets.APP_RG}} --slot staging --type zip
 
   test:
     runs-on: ubuntu-latest
