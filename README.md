@@ -1,4 +1,4 @@
-[![Deploy on Push to Main](https://github.com/joelbyford/QrCodeApiApp/actions/workflows/main-push.yml/badge.svg)](https://github.com/joelbyford/QrCodeApiApp/actions/workflows/main-push.yml) [![Test on Pull Request to Main](https://github.com/joelbyford/QrCodeApiApp/actions/workflows/main-pr.yml/badge.svg)](https://github.com/joelbyford/QrCodeApiApp/actions/workflows/main-pr.yml)
+[![Deploy on Push to Main](https://github.com/joelbyford/QrCodeApiApp/actions/workflows/main-push.yml/badge.svg)](https://github.com/joelbyford/QrCodeApiApp/actions/workflows/main-push.yml) [![Test on Pull Request to Main](https://github.com/joelbyford/QrCodeApiApp/actions/workflows/main-pr.yml/badge.svg)](https://github.com/joelbyford/QrCodeApiApp/actions/workflows/main-pr.yml) [![CodeQL Security Scan](https://github.com/joelbyford/QrCodeApiApp/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/joelbyford/QrCodeApiApp/actions/workflows/codeql-analysis.yml)
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjoelbyford%2FQrCodeApiApp%2Fmain%2FDeployTemplates%2FAzureLinuxWebAppArm.json)
 
@@ -22,8 +22,8 @@ Content-Type: text/plain
 
 Some text or URL to encode goes here
 ``` 
-## Basic Authentication (Added on 1/22/2021)
-Added the ability to use Basic Authentication with the API.  In order to leverage this functionality, please use the `appsettings.json` file to enable basic authentication, provide your "realm" (typically your API's url), and point to the json file where your users are listed (defaults to the provided `authorizedUsers.json`):
+## Basic Authentication
+Added the ability to optionally use [Basic Authentication](https://github.com/joelbyford/BasicAuth) to secure the API with one or more User/Password combinations using classic RFC 2617 HTTP authentication.  In order to leverage this functionality, please use the `appsettings.json` file to enable basic authentication, provide your "realm" (typically your API's url), and point to the json file where your users are listed (defaults to the provided `authorizedUsers.json`):
 
 ```
 "AppSettings" : {
@@ -44,6 +44,9 @@ The Authorized Users are simply stored in a json file in the following format:
     "devUser" : "devPassword"
 }
 ```
+
+**PLEASE DO NOT check userID's or passwords into your forked repo!**
+
 ## Lineage and Credit
 This leverages much of the work others have performed ahead of me.  Special thanks to GitHub Contributors Including:
 
