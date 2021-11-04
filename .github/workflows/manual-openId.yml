@@ -1,0 +1,63 @@
+# A manually triggered workflow which deploys to Azure using OpenID Connect (OIDC)
+
+name: OpenID Deploy
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+
+# Required for OIDC
+permissions:
+      id-token: write
+      
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      # Installs the CLI-beta in a python venv
+      - name: Installing CLI-beta for OpenID Connect
+        run: |
+          cd ../..
+          CWD="$(pwd)"
+          python3 -m venv oidc-venv
+          . oidc-venv/bin/activate
+          echo "activated environment"
+          python3 -m pip install -q --upgrade pip
+          echo "started installing cli beta"
+          pip install -q --extra-index-url https://azcliprod.blob.core.windows.net/beta/simple/ azure-cli
+          echo "***************installed cli beta*******************"
+          echo "$CWD/oidc-venv/bin" >> $GITHUB_PATH
+        
+      # Logs into Azure (note no password)
+      - name: 'Az CLI login'
+        uses: azure/login@v1.4.0
+        with:
+          client-id: ${{ secrets.AZURE_CLIENTID }}
+          tenant-id: ${{ secrets.AZURE_TENANTID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTIONID }}
+
+      - name: Setup dotnet 5.0.x
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+
+      - name: Restore package dependencies
+        run: dotnet restore
+
+      - name: dotet build
+        run: dotnet build --no-restore --configuration Release
+
+      - name: dotnet publish
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp --no-build
+    
+
+      - name: Azure CLI Publish
+        run: az webapp deployment source config-zip -g rgDoNotDeleteDemos -n qrcode-api-app --src ${{env.DOTNET_ROOT}}/myapp
