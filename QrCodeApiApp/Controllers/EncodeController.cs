@@ -11,6 +11,7 @@ namespace QrCodeApiApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     public class EncodeController : ControllerBase
     {
 
