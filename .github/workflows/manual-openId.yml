@@ -56,11 +56,13 @@ jobs:
         run: dotnet build --no-restore --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp --no-build
+        run: dotnet publish -c Release -o ./myapp --no-build
 
       - name: zip package
-        run: zip -r ${{env.DOTNET_ROOT}}/myapp.zip ${{env.DOTNET_ROOT}}/myapp/.
+        run: |
+          cd ./myapp
+          zip -r myapp.zip .
     
 
       - name: Azure CLI Publish
-        run: az webapp deployment source config-zip -g rgDoNotDeleteDemos -n qrcode-api-app --src ${{env.DOTNET_ROOT}}/myapp.zip
+        run: az webapp deployment source config-zip -g rgDoNotDeleteDemos -n qrcode-api-app --src myapp.zip
