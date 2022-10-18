@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Git checkout
-      uses: actions/checkout@v2.5
+      uses: actions/checkout@v2.5.0
 
     - name: Setup dotnet 6.0.x
       uses: actions/setup-dotnet@v1
@@ -44,7 +44,7 @@ jobs:
     needs: build
     steps:
       - name: Git checkout
-        uses: actions/checkout@v2.5
+        uses: actions/checkout@v2.5.0
 
       - name: Setup Python
         uses: actions/setup-python@v4.3.0
