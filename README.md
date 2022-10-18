@@ -3,13 +3,14 @@
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fjoelbyford%2FQrCodeApiApp%2Fmain%2FDeployTemplates%2FAzureLinuxWebAppArm.json)
 
 # QrCodeApiApp
-A simple QRCode Encoder API in .NET 5 using ZXing and published as an Azure API App.  
+A simple QRCode Encoder API in .NET 6 using ZXing and published as an Azure API App.  
 
 ## OS Limitations
 **Windows Only** - Currently this controller uses features from System.Drawing.Common which only work on Windows platforms therefore the service must be run as a Windows App Service at this time.   Please submit an issue if needed on other platforms and will prioritize the change when requested.  Thanks for your understanding.
 
 
 ## Examples and Usage
+For examples running on localhost (e.g. local development), please see [manualTesting.http](QrCodeApiApp/test/manualTesting.http)
 
 ### GET Usage 
 Once running as a website, simply call
