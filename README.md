@@ -6,7 +6,7 @@
 A simple QRCode Encoder API in .NET 6 using ZXing and published as an Azure API App.  
 
 ## OS Limitations
-**Windows Only** - Currently this controller uses features from System.Drawing.Common which only work on Windows platforms therefore the service must be run as a Windows App Service at this time.   Please submit an issue if needed on other platforms and will prioritize the change when requested.  Thanks for your understanding.
+**Windows Only** - Currently this controller uses features from `System.Drawing.Common` which [only work on Windows platforms](https://learn.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/6.0/system-drawing-common-windows-only#reason-for-change) therefore the service must be run as a Windows App Service at this time.   Please submit an issue if needed on other platforms and will prioritize the change when requested.  Thanks for your understanding.
 
 
 ## Examples and Usage
