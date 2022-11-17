@@ -65,4 +65,4 @@ jobs:
     
 
       - name: Azure CLI Publish
-        run: az webapp deployment source config-zip -g rgDoNotDeleteDemos -n qrcode-api-app --src ./myapp/myapp.zip
+        run: az webapp deployment source config-zip -g rgDoNotDeleteDemos -n ${{secrets.APP_NAME}} --src ./myapp/myapp.zip
