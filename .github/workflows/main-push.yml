@@ -39,7 +39,7 @@ jobs:
         # Applies to Web Apps(Windows and Linux) and Web App Containers(linux). Multi container scenario not supported. Publish profile (*.publishsettings) file contents with Web Deploy secrets
         publish-profile: ${{secrets.AZUREWEBAPPPUBLISHPROFILE_STAGE}}
         # Enter an existing Slot other than the Production slot
-        slot-name: staging
+        slot-name: stage
         # Applies to Web App only: Path to package or folder. *.zip, *.war, *.jar or a folder to deploy
         package: ${{env.DOTNET_ROOT}}/myapp
          
@@ -81,7 +81,7 @@ jobs:
         uses: Azure/cli@1.0.4
         with:
           # Specify the script here
-          inlineScript: az webapp deployment slot swap  --name ${{secrets.APP_NAME}} --resource-group ${{secrets.APP_RG}} --slot staging --target-slot production
+          inlineScript: az webapp deployment slot swap  --name ${{secrets.APP_NAME}} --resource-group ${{secrets.APP_RG}} --slot stage --target-slot production
           
           
 
