@@ -75,7 +75,7 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
           enable-AzPSSession: false
           # Name of the environment. Supported values are azurecloud, azurestack, azureusgovernment, azurechinacloud, azuregermancloud. Default being azurecloud
-          environment: azureusgovernment
+          # environment: azureusgovernment
 
       - name: Azure Publish to Staging
         uses: Azure/cli@1.0.4
