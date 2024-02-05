@@ -37,7 +37,7 @@ jobs:
       
     # Logs into Azure via OIDC (note no password)
     - name: 'Az OIDC CLI login'
-      uses: azure/login@v1
+      uses: azure/login@v1.4.0
       with:
         client-id: ${{ secrets.AZURE_CLIENTID }}
         tenant-id: ${{ secrets.AZURE_TENANTID }}
