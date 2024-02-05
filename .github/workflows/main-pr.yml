@@ -60,10 +60,7 @@ jobs:
         zip -r myapp.zip .
       
     - name: Azure CLI Publish
-      uses: Azure/cli@1.0.4
-      with:
-        # Specify the script here
-        inlineScript: az webapp deployment source config-zip -g rgDoNotDeleteDemos -n ${{secrets.APP_NAME}} --slot test --src ${{env.DOTNET_ROOT}}/myapp/myapp.zip
+      run: az webapp deployment source config-zip -g rgDoNotDeleteDemos -n ${{secrets.APP_NAME}} --slot test --src ${{env.DOTNET_ROOT}}/myapp/myapp.zip
 
   test:
     name: Smoke Test Dev Slot

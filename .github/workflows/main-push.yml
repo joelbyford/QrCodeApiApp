@@ -67,10 +67,7 @@ jobs:
 
     # Publishes the app to the staging slot
     - name: Azure CLI Publish
-      uses: Azure/cli@1.0.4
-      with:
-        # Specify the script here
-        inlineScript:  az webapp deployment source config-zip -g rgDoNotDeleteDemos -n ${{secrets.APP_NAME}} --slot stage --src ${{env.DOTNET_ROOT}}/myapp/myapp.zip
+      run: az webapp deployment source config-zip -g rgDoNotDeleteDemos -n ${{secrets.APP_NAME}} --slot stage --src ${{env.DOTNET_ROOT}}/myapp/myapp.zip
      
   test:
     name: Test Staging Slot
@@ -123,10 +120,7 @@ jobs:
           # environment: azurecloud
 
       - name: Azure Publish to Staging
-        uses: Azure/cli@1.0.4
-        with:
-          # Specify the script here
-          inlineScript: az webapp deployment slot swap  --name ${{secrets.APP_NAME}} --resource-group ${{secrets.APP_RG}} --slot stage --target-slot production
+        run: az webapp deployment slot swap  --name ${{secrets.APP_NAME}} --resource-group ${{secrets.APP_RG}} --slot stage --target-slot production
 
 
 
