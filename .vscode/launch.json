@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/QrCodeApiApp/bin/Debug/netcoreapp2.1/QrCodeApiApp.dll",
+            "program": "${workspaceFolder}/QrCodeApiApp/bin/Debug/net6.0/QrCodeApiApp.dll",
             "args": [],
             "cwd": "${workspaceFolder}/QrCodeApiApp",
             "stopAtEntry": false,
@@ -36,7 +36,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/QrCodeApiApp/bin/Debug/netcoreapp2.1/QrCodeApiApp.dll",
+            "program": "${workspaceFolder}/QrCodeApiApp/bin/Debug/net6.0/QrCodeApiApp.dll",
             "args": [],
             "cwd": "${workspaceFolder}/QrCodeApiApp",
             "stopAtEntry": false,
