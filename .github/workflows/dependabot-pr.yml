@@ -1,8 +1,7 @@
 name: Test on Pull Request to Main
 
 on:
-  pull_request_target:
-    branches: [ main ]
+  pull_request_target
 
 permissions:
   id-token: write
