@@ -1,0 +1,94 @@
+name: Test on Pull Request to Main
+
+on:
+  pull_request_target:
+    branches: [ main ]
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    name: Build To Dev Slot
+    runs-on: ubuntu-latest
+    # Ensure that the job runs only when the PR is opened by dependabot
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+    - name: Git checkout
+      uses: actions/checkout@v2
+    
+    # Installs the CLI-beta in a python venv
+    - name: Installing CLI-beta for OpenID Connect
+      run: |
+        cd ../..
+        CWD="$(pwd)"
+        python3 -m venv oidc-venv
+        . oidc-venv/bin/activate
+        echo "activated environment"
+        python3 -m pip install -q --upgrade pip
+        echo "started installing cli beta"
+        pip install -q --extra-index-url https://azcliprod.blob.core.windows.net/beta/simple/ azure-cli
+        echo "***************installed cli beta*******************"
+        echo "$CWD/oidc-venv/bin" >> $GITHUB_PATH
+
+    # Logs into Azure via OIDC (note no password)
+    - name: 'Az OIDC CLI login'
+      uses: azure/login@v1.4.0
+      with:
+        client-id: ${{ secrets.AZURE_CLIENTID }}
+        tenant-id: ${{ secrets.AZURE_TENANTID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTIONID }}
+        # Name of the environment. Supported values are azurecloud, azurestack, azureusgovernment, azurechinacloud, azuregermancloud. Default being azurecloud
+        # environment: azurecloud
+
+    - name: Setup dotnet 6.0.x
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Restore package dependencies
+      run: dotnet restore
+
+    - name: dotet build
+      run: dotnet build --no-restore --configuration Release
+      
+    - name: dotnet publish
+      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp 
+
+    - name: zip package
+      run: |
+        cd ${{env.DOTNET_ROOT}}/myapp
+        zip -r myapp.zip .
+      
+    - name: Azure CLI Publish
+      run: az webapp deployment source config-zip -g rgDoNotDeleteDemos -n ${{secrets.APP_NAME}} --slot test --src ${{env.DOTNET_ROOT}}/myapp/myapp.zip
+
+  test:
+    name: Smoke Test Dev Slot
+    runs-on: ubuntu-latest
+    needs: build
+    # Ensure that the job runs only when the PR is opened by dependabot
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2.2.1
+
+      - name: Install pytest
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+          pip install requests
+
+      - name: Test with pytest
+        run: |
+          cd QrCodeApiApp/test
+          pytest --url ${{secrets.TEST_URL}}
+
+
+
+
+
