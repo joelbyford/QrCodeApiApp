@@ -1,4 +1,4 @@
-name: Test on Pull Request to Main
+name: Test on Dependabot Pull Request
 
 on:
   pull_request_target
