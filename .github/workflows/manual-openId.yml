@@ -44,10 +44,10 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANTID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTIONID }}
 
-      - name: Setup dotnet 6.0.x
+      - name: Setup dotnet 8.0.x
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 8.0.x
 
       - name: Restore package dependencies
         run: dotnet restore
