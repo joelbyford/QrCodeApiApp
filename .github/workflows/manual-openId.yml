@@ -20,32 +20,32 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       
       # Installs the CLI-beta in a python venv
-      - name: Installing CLI-beta for OpenID Connect
-        run: |
-          cd ../..
-          CWD="$(pwd)"
-          python3 -m venv oidc-venv
-          . oidc-venv/bin/activate
-          echo "activated environment"
-          python3 -m pip install -q --upgrade pip
-          echo "started installing cli beta"
-          pip install -q --extra-index-url https://azcliprod.blob.core.windows.net/beta/simple/ azure-cli
-          echo "***************installed cli beta*******************"
-          echo "$CWD/oidc-venv/bin" >> $GITHUB_PATH
+      #- name: Installing CLI-beta for OpenID Connect
+      #  run: |
+      #    cd ../..
+      #    CWD="$(pwd)"
+      #    python3 -m venv oidc-venv
+      #    . oidc-venv/bin/activate
+      #    echo "activated environment"
+      #    python3 -m pip install -q --upgrade pip
+      #    echo "started installing cli beta"
+      #    pip install -q --extra-index-url https://azcliprod.blob.core.windows.net/beta/simple/ azure-cli
+      #    echo "***************installed cli beta*******************"
+      #    echo "$CWD/oidc-venv/bin" >> $GITHUB_PATH
         
       # Logs into Azure (note no password)
       - name: 'Az CLI login'
-        uses: azure/login@v1.4.0
+        uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZURE_CLIENTID }}
           tenant-id: ${{ secrets.AZURE_TENANTID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTIONID }}
 
       - name: Setup dotnet 8.0.x
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
 
