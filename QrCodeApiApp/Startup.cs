@@ -31,9 +31,10 @@ namespace QrCodeApiApp
         {
             services.AddMvc(o => o.InputFormatters.Insert(0, new TxtInputFormatter()));
             services.AddControllers();
+            services.AddEndpointsApiExplorer();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v5", new OpenApiInfo { Title = "QrCodeApiApp", Version = "v5" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "QrCodeApiApp", Version = "v1" });
             });
         }
 
@@ -44,7 +45,7 @@ namespace QrCodeApiApp
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "QrCodeApiApp v5"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "QrCodeApiApp v1"));
             }
             //Insert the Basic Authentication Middleware handler *ONLY IF* it was enabled in appsettings.json
             bool basicAuthEnabled = this.Configuration.GetValue<bool>("AppSettings:BasicAuth:Enabled");
