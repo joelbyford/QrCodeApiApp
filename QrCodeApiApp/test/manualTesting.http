@@ -32,3 +32,22 @@ Content-Type: text/plain
 Authorization: Basic testUser:testPassword
 
 https://github.com/joelbyford/QrCodeApiApp
+
+
+####
+# Example POST sending a VCard via post - ANONYMOUS ACCESS
+POST http://localhost:5000/api/encode?size=500
+Content-Type: text/plain
+
+BEGIN:VCARD
+VERSION:4.0
+N:last_name;first_name;;;
+FN:your_full_name
+TITLE:your_title
+ORG:your_organization
+ADR;TYPE=WORK:;;Redmond;WA;;United States
+EMAIL:your_alias@microsoft.com
+TEL;TYPE=WORK:+1-XXX-XXX-XXXX
+URL:https://www.linkedin.com/in/your_profile
+END:VCARD
+
