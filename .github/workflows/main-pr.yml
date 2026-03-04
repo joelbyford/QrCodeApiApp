@@ -49,12 +49,12 @@ jobs:
         zip -r myapp.zip .
       
     - name: Azure CLI Publish
-      run: az webapp deployment source config-zip -g rgDoNotDeleteDemos -n ${{secrets.APP_NAME}} --slot test --src ${{env.DOTNET_ROOT}}/myapp/myapp.zip
+      run: az webapp deployment source config-zip -g ${{ secrets.APP_RG }} -n ${{secrets.APP_NAME}} --slot test --src ${{env.DOTNET_ROOT}}/myapp/myapp.zip
 
     - name: Set slot-sticky app settings (env vars) on test slot
       run: |
         az webapp config appsettings set \
-          -g rgDoNotDeleteDemos \
+          -g ${{ secrets.APP_RG }} \
           -n ${{ secrets.APP_NAME }} \
           --output none \
           --slot test \
