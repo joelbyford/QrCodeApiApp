@@ -26,7 +26,11 @@ def test_get(url):
 
 def test_post(url):
     # Additional headers and payload required for POST
-    headers = {'Content-Type': 'text/plain'}
+    headers = {
+        'Content-Type': 'text/plain',
+        'X-Forwarded-Proto': 'https',
+        'Authorization': 'Basic testUser:testPassword'
+    }
     payload = 'Some Test Content to be encoded Goes here'
 
     # Post  
