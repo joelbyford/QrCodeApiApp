@@ -10,15 +10,19 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/QrCodeApiApp/bin/Debug/net8.0/QrCodeApiApp.dll",
+            "program": "${workspaceFolder}/QrCodeApiApp/bin/Debug/net10.0/QrCodeApiApp.dll",
             "args": [],
             "cwd": "${workspaceFolder}/QrCodeApiApp",
             "stopAtEntry": false,
             "launchBrowser": {
-                "enabled": true
+                "enabled": true,
+                "args": "${auto-detect-url}/swagger"
             },
             "env": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://localhost:5000",
+                "BASIC_AUTH_USER": "testUser",
+                "BASIC_AUTH_PASS": "testPassword"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"
@@ -36,28 +40,32 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/QrCodeApiApp/bin/Debug/net8.0/QrCodeApiApp.dll",
+            "program": "${workspaceFolder}/QrCodeApiApp/bin/Debug/net10.0/QrCodeApiApp.dll",
             "args": [],
             "cwd": "${workspaceFolder}/QrCodeApiApp",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {
                 "enabled": true,
-                "args": "${auto-detect-url}",
+                "args": "${auto-detect-url}/swagger",
                 "windows": {
                     "command": "cmd.exe",
-                    "args": "/C start ${auto-detect-url}/api/encode?text=abc123"
-                }//,
-                //"osx": {
-                //    "command": "open"
-                //},
-                //"linux": {
-                //    "command": "xdg-open"
-                //}
+                    "args": "/C start http://localhost:5000/swagger"
+                },
+                "osx": {
+                    "command": "open",
+                    "args": "http://localhost:5000/swagger"
+                },
+                "linux": {
+                    "command": "xdg-open",
+                    "args": "http://localhost:5000/swagger"
+                }
             },  
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development",
-                "ASPNETCORE_URLS": "https://localhost:5001/"
+                "ASPNETCORE_URLS": "http://localhost:5000",
+                "BASIC_AUTH_USER": "testUser",
+                "BASIC_AUTH_PASS": "testPassword"
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"

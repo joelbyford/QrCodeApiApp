@@ -67,8 +67,13 @@ namespace QrCodeApiApp
 
                 // Using the BasicAuth NuGet package from https://github.com/joelbyford/BasicAuth
                 Dictionary<string, string> basicAuthUsers = new Dictionary<string, string>();
-                var packageJson = File.ReadAllText(basicAuthUserJson);
-                basicAuthUsers = JsonSerializer.Deserialize<Dictionary<string, string>>(packageJson);
+                var username = Environment.GetEnvironmentVariable("BASIC_AUTH_USER");
+                var password = Environment.GetEnvironmentVariable("BASIC_AUTH_PASS");
+                if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
+                {
+                    basicAuthUsers.Add(username, password);
+                }
+                //basicAuthUsers = JsonSerializer.Deserialize<Dictionary<string, string>>(packageJson);
                 app.UseMiddleware<joelbyford.BasicAuth>(basicAuthRealm, basicAuthUsers);
             }
 
