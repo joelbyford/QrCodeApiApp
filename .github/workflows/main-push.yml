@@ -55,7 +55,7 @@ jobs:
     - name: Azure CLI Publish
       run: az webapp deployment source config-zip -g ${{ secrets.APP_RG }} -n ${{secrets.APP_NAME}} --slot stage --src ${{env.DOTNET_ROOT}}/myapp/myapp.zip
 
-    - name: Set slot-sticky app settings (env vars) on test slot
+    - name: Set slot-sticky app settings (env vars) on stage slot
       run: |
         az webapp config appsettings set \
           -g ${{ secrets.APP_RG }} \
