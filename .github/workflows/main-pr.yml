@@ -64,6 +64,17 @@ jobs:
     - name: Azure CLI Publish
       run: az webapp deployment source config-zip -g rgDoNotDeleteDemos -n ${{secrets.APP_NAME}} --slot test --src ${{env.DOTNET_ROOT}}/myapp/myapp.zip
 
+    - name: Set slot-sticky app settings (env vars) on test slot
+      run: |
+        az webapp config appsettings set \
+          -g rgDoNotDeleteDemos \
+          -n ${{ secrets.APP_NAME }} \
+          --slot test \
+          --slot-settings \
+            BASIC_AUTH_USER="${{ secrets.BASIC_AUTH_USER }}" \
+            BASIC_AUTH_PASS="${{ secrets.BASIC_AUTH_PASS }}"
+      
+
   test:
     name: Smoke Test Dev Slot
     runs-on: ubuntu-latest
